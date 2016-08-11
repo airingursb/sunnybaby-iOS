@@ -159,9 +159,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             city = (city as NSString).substringToIndex(2)
             
             dataUtil.cacheSetString("city", value: city)
+            
             print(city)
+            
             getWeather(city)
-            getWeatherByJuhe(city)
         } else {
             let alertControllerNetFailed = UIAlertController(title: "晴宝", message: "网络异常", preferredStyle: UIAlertControllerStyle.Alert)
             let cancelAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
@@ -182,27 +183,37 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let jsonData = NSData(contentsOfURL: nsurl!)
         let json = JSON(data:jsonData!)
         
-        let temperature = String(json["result"][0]["temperature"])
-        var city = String(json["result"][0]["city"])
-        var province = String(json["result"][0]["province"])
-        var aircondition = String(json["result"][0]["airCondition"])
-        
-        dataUtil.cacheSetString("province", value: province)
-        
-        if aircondition != "轻度污染" && aircondition != "中度污染" && aircondition != "重度污染" {
-            aircondition = "空气：" + aircondition
+        if String(json["msg"]) == "success" {
+            let temperature = String(json["result"][0]["temperature"])
+            var city = String(json["result"][0]["city"])
+            var province = String(json["result"][0]["province"])
+            var aircondition = String(json["result"][0]["airCondition"])
+            
+            dataUtil.cacheSetString("province", value: province)
+            
+            if aircondition != "轻度污染" && aircondition != "中度污染" && aircondition != "重度污染" {
+                aircondition = "空气：" + aircondition
+            }
+            
+            city = city + "市"
+            
+            aircondition = aircondition.stringByApplyingTransform("Hans-Hant", reverse: false)!
+            city = city.stringByApplyingTransform("Hans-Hant", reverse: false)!
+            province = province.stringByApplyingTransform("Hans-Hant", reverse: false)!
+            
+            self.lblTemperature.text = temperature
+            self.lblCity.text = city
+            self.lblProvince.text = province
+            self.lblAirCondition.text = aircondition
+            
+            getWeatherByJuhe(city)
+            
+        } else {
+            // 城市不存在
+            dataUtil.cacheSetString("city", value: "广州")
+            getWeather("广州")
+            getWeatherByJuhe("广州")
         }
-        
-        city = city + "市"
-        
-        aircondition = aircondition.stringByApplyingTransform("Hans-Hant", reverse: false)!
-        city = city.stringByApplyingTransform("Hans-Hant", reverse: false)!
-        province = province.stringByApplyingTransform("Hans-Hant", reverse: false)!
-        
-        self.lblTemperature.text = temperature
-        self.lblCity.text = city
-        self.lblProvince.text = province
-        self.lblAirCondition.text = aircondition
     }
     
     /**

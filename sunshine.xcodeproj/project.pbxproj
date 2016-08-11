@@ -33,6 +33,7 @@
 		9D41C7AB1D5234A200CFE0E1 /* ClauseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClauseController.swift; sourceTree = "<group>"; };
 		9D8C2BA41D4F566800C7871C /* FutureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureViewController.swift; sourceTree = "<group>"; };
 		9D8C2BA61D4F739B00C7871C /* DataUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUtil.swift; sourceTree = "<group>"; };
+		9D95248F1D5871810093CF24 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../Library/Developer/Xcode/DerivedData/sunshine-govvrswzmmoxqxavycmhmseqcudz/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
 		9DD383071D4D921D00E4AEBA /* sunshine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sunshine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DD3830A1D4D921D00E4AEBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DD3830C1D4D921D00E4AEBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +137,7 @@
 		E9A4D46F23A239651952F7E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D95248F1D5871810093CF24 /* Alamofire.framework */,
 				9DFBE4641D4E04EC00E54D16 /* SwiftyJSON.framework */,
 				9D1F6A841D4E01AE009C5F3B /* SwiftyJSON.framework */,
 				74B94885280385D3C1B1B28D /* Pods.framework */,
