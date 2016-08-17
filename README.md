@@ -8,8 +8,10 @@ Android 版 GitHub 地址：[http://github.com/airingursb/sunnybaby](http://gith
 
 iOS 版 GitHub 地址：[http://github.com/airingursb/sunnybaby-iOS](http://github.com/airingursb/sunnybaby-iOS)
 
-## ScreenShots
+## Screenshot
 
 ![](http://airing.ursb.me/image/sunnybaby/sunshine-screenshot1.png-h600.jpg)
 
 ![](http://airing.ursb.me/image/sunnybaby/sunshine-screenshot2.png-h600.jpg)
+
+持续更新中，欢迎Star~欢迎下载~
