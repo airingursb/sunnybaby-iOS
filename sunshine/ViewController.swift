@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import SwiftyJSON
+import NVActivityIndicatorView
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -25,14 +26,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var lblMoon: UILabel!
     @IBOutlet weak var lblTime: UILabel!
     
-    @IBAction func locateAction(sender: UIBarButtonItem) {
-        self.locate()
-    }
-    
     var locationManager:CLLocationManager!
     var dataUtil: DataUtil = DataUtil()
     var city:String = ""
     var weatherImageToken = ""
+    
+    override func viewWillAppear(animated: Bool) {
+
+        if dataUtil.cacheGetString("first") != nil {
+            // 已使用搜索城市
+            self.city = dataUtil.cacheGetString("city")!
+            self.getWeather(self.city)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,40 +60,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         self.navigationController?.navigationBar.titleTextAttributes = navigationTitleAttribute as? [String : AnyObject]
         
         self.lblPm.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2));
-        
+        self.custonGestureLeft()
 
-        locate()
-        
-//        if dataUtil.cacheGetInt("first") == 1 {
-//            // 非首次登陆
-//            self.city = dataUtil.cacheGetString("city")
-//            
-//        } else {
-//            // 第一次登陆，默认定位
-//            dataUtil.cacheSetInt("first", value: 0)
-//            locationManager = CLLocationManager()
-//            
-//            // 设置定位的精确度
-//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//            
-//            // 设置定位变化的最小距离 距离过滤器
-//            locationManager.distanceFilter = 50
-//            
-//            // 设置请求定位的状态
-//            locationManager.requestWhenInUseAuthorization()
-//            
-//            // 设置代理为当前对象
-//            locationManager.delegate = self;
-//            
-//            if CLLocationManager.locationServicesEnabled(){
-//                // 开启定位服务
-//                locationManager.startUpdatingLocation()
-//            }else{
-//                print("没有定位服务")
-//            }
-//        }
-        
-        custonGestureLeft()
+        if dataUtil.cacheGetString("first") == nil {
+            // 首次登陆，自动定位城市
+            self.locate()
+        } else {
+            // 已使用搜索城市
+            self.city = dataUtil.cacheGetString("city")!
+            self.getWeather(self.city)
+        }
     }
     
     func locate() {
@@ -121,7 +103,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
      */
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("定位失败调用的代理方法")
-        print(error)
+        dataUtil.cacheSetString("city", value: "广州")
+        self.city = "广州"
+        self.getWeather(self.city)
     }
     
     /**
@@ -150,7 +134,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let url = "http://api.map.baidu.com/geocoder/v2/?ak=SifOGPQtBo3soE1x0MY3GF5yQmcH3vCr&output=json&pois=1&location=" + String(lat) + "%2C" + String(lon)
         
         let nsurl = NSURL(string: url)
-        let jsonData=NSData(contentsOfURL: nsurl!)
+        
+        let boxView = UIView(frame: CGRect(x: UIScreen.mainScreen().bounds.width / 2 - 70, y: UIScreen.mainScreen().bounds.height / 2 - 40, width: 140, height: 80))
+        boxView.backgroundColor = UIColor(red: CGFloat(230 / 255.0), green: CGFloat(230 / 255.0), blue: CGFloat(230 / 255.0), alpha: 0.9)
+        boxView.layer.cornerRadius = 10
+        self.view.addSubview(boxView)
+        
+        let frame = CGRect(x: 70 - 20, y: 40 - 20, width: 40, height: 40)
+        let activityIndicatorView = NVActivityIndicatorView(frame: frame, type: .BallSpinFadeLoader, color: UIColor.whiteColor())
+        boxView.addSubview(activityIndicatorView)
+        
+        activityIndicatorView.startAnimation()
+        
+        let jsonData = NSData(contentsOfURL: nsurl!)
         
         if jsonData != nil {
             let json = JSON(data:jsonData!)
@@ -158,11 +154,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
             city = (city as NSString).substringToIndex(2)
             
-            dataUtil.cacheSetString("city", value: city)
+            self.dataUtil.cacheSetString("city", value: city)
+            self.city = city
             
             print(city)
             
-            getWeather(city)
+            self.getWeather(city)
+            
+            activityIndicatorView.stopAnimation()
+            boxView.removeFromSuperview()
+            
         } else {
             let alertControllerNetFailed = UIAlertController(title: "晴宝", message: "网络异常", preferredStyle: UIAlertControllerStyle.Alert)
             let cancelAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
@@ -181,38 +182,58 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let nsurl = NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)
         
         let jsonData = NSData(contentsOfURL: nsurl!)
-        let json = JSON(data:jsonData!)
         
-        if String(json["msg"]) == "success" {
-            let temperature = String(json["result"][0]["temperature"])
-            var city = String(json["result"][0]["city"])
-            var province = String(json["result"][0]["province"])
-            var aircondition = String(json["result"][0]["airCondition"])
+        if jsonData != nil {
             
-            dataUtil.cacheSetString("province", value: province)
+            let json = JSON(data:jsonData!)
             
-            if aircondition != "轻度污染" && aircondition != "中度污染" && aircondition != "重度污染" {
-                aircondition = "空气：" + aircondition
+            print("通过 mob.com 获取天气信息")
+            print(json)
+            
+            if String(json["msg"]) == "success" {
+                
+                let temperature = String(json["result"][0]["temperature"])
+                var city = String(json["result"][0]["city"])
+                var province = String(json["result"][0]["province"])
+                var aircondition = String(json["result"][0]["airCondition"])
+                
+                dataUtil.cacheSetString("province", value: province)
+                
+                if aircondition != "轻度污染" && aircondition != "中度污染" && aircondition != "重度污染" {
+                    aircondition = "空气：" + aircondition
+                }
+                
+                city = city + "市"
+                
+                aircondition = aircondition.stringByApplyingTransform("Hans-Hant", reverse: false)!
+                city = city.stringByApplyingTransform("Hans-Hant", reverse: false)!
+                province = province.stringByApplyingTransform("Hans-Hant", reverse: false)!
+                
+                self.lblTemperature.text = temperature
+                self.lblCity.text = city
+                self.lblProvince.text = province
+                self.lblAirCondition.text = aircondition
+                
+                self.getWeatherByJuhe(self.city)
+                dataUtil.cacheSetString("exist", value: "1")
+
+                
+            } else {
+                // 城市不存在
+                print("城市不存在")
+                let alertControllerCityFailed = UIAlertController(title: "晴宝", message: "城市不存在，请定位国内城市", preferredStyle: UIAlertControllerStyle.Alert)
+                let cancelAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+                alertControllerCityFailed.addAction(cancelAction)
+                self.presentViewController(alertControllerCityFailed, animated: true, completion: nil)
+                
+                dataUtil.cacheSetString("exist", value: "0")
+
             }
-            
-            city = city + "市"
-            
-            aircondition = aircondition.stringByApplyingTransform("Hans-Hant", reverse: false)!
-            city = city.stringByApplyingTransform("Hans-Hant", reverse: false)!
-            province = province.stringByApplyingTransform("Hans-Hant", reverse: false)!
-            
-            self.lblTemperature.text = temperature
-            self.lblCity.text = city
-            self.lblProvince.text = province
-            self.lblAirCondition.text = aircondition
-            
-            getWeatherByJuhe(city)
-            
         } else {
-            // 城市不存在
-            dataUtil.cacheSetString("city", value: "广州")
-            getWeather("广州")
-            getWeatherByJuhe("广州")
+            let alertControllerNetFailedAnother = UIAlertController(title: "晴宝", message: "网络异常", preferredStyle: UIAlertControllerStyle.Alert)
+            let cancelAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+            alertControllerNetFailedAnother.addAction(cancelAction)
+            self.presentViewController(alertControllerNetFailedAnother, animated: true, completion: nil)
         }
     }
     
@@ -223,10 +244,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
      */
     func getWeatherByJuhe(city:String) {
         let url = "https://op.juhe.cn/onebox/weather/query?key=178058f2f64003a22805b167c2583075&cityname=" + city
+        
+        print(url)
+        
         let nsurl = NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)
         
         let jsonData = NSData(contentsOfURL: nsurl!)
         let json = JSON(data:jsonData!)
+        
+        print("通过聚合数据获取天气信息")
+        print(json)
         
         var weather = String(json["result"]["data"]["realtime"]["weather"]["info"])
         var windpower = String(json["result"]["data"]["realtime"]["wind"]["power"])

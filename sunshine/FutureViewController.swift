@@ -54,11 +54,20 @@ class FutureViewController: UIViewController {
         rightSwipe.direction = .Right
         self.view.addGestureRecognizer(rightSwipe)
         
-        self.city = dataUitl.cacheGetString("city")
-        self.lblProvince.text = dataUitl.cacheGetString("province").stringByApplyingTransform("Hans-Hant", reverse: false)!
-        self.lblCity.text = (dataUitl.cacheGetString("city") + "市").stringByApplyingTransform("Hans-Hant", reverse: false)!
-        
-        getWeatherByJuhe(self.city)
+        if dataUitl.cacheGetString("exist") == "0" {
+            print("城市不存在")
+            let alertControllerCityFailed = UIAlertController(title: "晴宝", message: "城市不存在，请定位国内城市", preferredStyle: UIAlertControllerStyle.Alert)
+            let cancelAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+            alertControllerCityFailed.addAction(cancelAction)
+            self.presentViewController(alertControllerCityFailed, animated: true, completion: nil)
+        } else {
+            self.city = dataUitl.cacheGetString("city")!
+            self.lblProvince.text = dataUitl.cacheGetString("province")!.stringByApplyingTransform("Hans-Hant", reverse: false)!
+            self.lblCity.text = (dataUitl.cacheGetString("city")! + "市").stringByApplyingTransform("Hans-Hant", reverse: false)!
+            
+            getWeatherByJuhe(self.city)
+        }
+    
     }
     
     func back() {

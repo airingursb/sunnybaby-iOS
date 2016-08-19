@@ -11,6 +11,7 @@
 		9D41C7AC1D5234A200CFE0E1 /* ClauseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D41C7AB1D5234A200CFE0E1 /* ClauseController.swift */; };
 		9D8C2BA51D4F566800C7871C /* FutureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C2BA41D4F566800C7871C /* FutureViewController.swift */; };
 		9D8C2BA71D4F739B00C7871C /* DataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C2BA61D4F739B00C7871C /* DataUtil.swift */; };
+		9D983A9D1D5C26C100CD56C6 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D983A9C1D5C26C100CD56C6 /* NVActivityIndicatorView.framework */; };
 		9DD3830B1D4D921D00E4AEBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD3830A1D4D921D00E4AEBA /* AppDelegate.swift */; };
 		9DD3830D1D4D921E00E4AEBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD3830C1D4D921D00E4AEBA /* ViewController.swift */; };
 		9DD383101D4D921E00E4AEBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DD3830E1D4D921E00E4AEBA /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		9DFBE4721D4EF3AF00E54D16 /* LeftGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBE4711D4EF3AF00E54D16 /* LeftGestureRecognizer.swift */; };
 		9DFBE4751D4F340800E54D16 /* HanaMinA.ttf in Sources */ = {isa = PBXBuildFile; fileRef = 9DFBE4741D4F33C700E54D16 /* HanaMinA.ttf */; };
 		9DFBE4761D4F391200E54D16 /* HanaMinA.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DFBE4741D4F33C700E54D16 /* HanaMinA.ttf */; };
+		9DFDCCAA1D6559A2005F754D /* FeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDCCA91D6559A2005F754D /* FeedbackController.swift */; };
 		E2010F87531DBB11902EF41E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74B94885280385D3C1B1B28D /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,8 @@
 		9D8C2BA41D4F566800C7871C /* FutureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureViewController.swift; sourceTree = "<group>"; };
 		9D8C2BA61D4F739B00C7871C /* DataUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataUtil.swift; sourceTree = "<group>"; };
 		9D95248F1D5871810093CF24 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../Library/Developer/Xcode/DerivedData/sunshine-govvrswzmmoxqxavycmhmseqcudz/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
+		9D983A9A1D5C26BC00CD56C6 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = "Pods/../build/Debug-iphoneos/Async.framework"; sourceTree = "<group>"; };
+		9D983A9C1D5C26C100CD56C6 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = "../../../../Library/Developer/Xcode/DerivedData/sunshine-govvrswzmmoxqxavycmhmseqcudz/Build/Products/Debug-iphoneos/NVActivityIndicatorView.framework"; sourceTree = "<group>"; };
 		9DD383071D4D921D00E4AEBA /* sunshine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sunshine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DD3830A1D4D921D00E4AEBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DD3830C1D4D921D00E4AEBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +53,7 @@
 		9DFBE46F1D4E4AB200E54D16 /* UIBarExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarExtension.swift; sourceTree = "<group>"; };
 		9DFBE4711D4EF3AF00E54D16 /* LeftGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftGestureRecognizer.swift; sourceTree = "<group>"; };
 		9DFBE4741D4F33C700E54D16 /* HanaMinA.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HanaMinA.ttf; sourceTree = "<group>"; };
+		9DFDCCA91D6559A2005F754D /* FeedbackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackController.swift; sourceTree = "<group>"; };
 		B5ACDFB7AE358817C83CD35C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CC788622252D1320A14A2A25 /* Pods_sunshine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sunshine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE2F442828830E868C06F9BD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -59,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D983A9D1D5C26C100CD56C6 /* NVActivityIndicatorView.framework in Frameworks */,
 				9DFBE4651D4E04EC00E54D16 /* SwiftyJSON.framework in Frameworks */,
 				E2010F87531DBB11902EF41E /* Pods.framework in Frameworks */,
 			);
@@ -112,6 +118,7 @@
 				9DFBE4711D4EF3AF00E54D16 /* LeftGestureRecognizer.swift */,
 				9D8C2BA61D4F739B00C7871C /* DataUtil.swift */,
 				9D41C7AB1D5234A200CFE0E1 /* ClauseController.swift */,
+				9DFDCCA91D6559A2005F754D /* FeedbackController.swift */,
 			);
 			path = sunshine;
 			sourceTree = "<group>";
@@ -137,6 +144,8 @@
 		E9A4D46F23A239651952F7E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D983A9C1D5C26C100CD56C6 /* NVActivityIndicatorView.framework */,
+				9D983A9A1D5C26BC00CD56C6 /* Async.framework */,
 				9D95248F1D5871810093CF24 /* Alamofire.framework */,
 				9DFBE4641D4E04EC00E54D16 /* SwiftyJSON.framework */,
 				9D1F6A841D4E01AE009C5F3B /* SwiftyJSON.framework */,
@@ -181,6 +190,7 @@
 				TargetAttributes = {
 					9DD383061D4D921D00E4AEBA = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = CX8NZ6G6FX;
 					};
 				};
 			};
@@ -277,6 +287,7 @@
 				9DD3830B1D4D921D00E4AEBA /* AppDelegate.swift in Sources */,
 				9DD383131D4D921E00E4AEBA /* sunshine.xcdatamodeld in Sources */,
 				9DFBE46E1D4E43E700E54D16 /* SWRevealViewController.m in Sources */,
+				9DFDCCAA1D6559A2005F754D /* FeedbackController.swift in Sources */,
 				9D8C2BA71D4F739B00C7871C /* DataUtil.swift in Sources */,
 				9D41C7AC1D5234A200CFE0E1 /* ClauseController.swift in Sources */,
 				9D8C2BA51D4F566800C7871C /* FutureViewController.swift in Sources */,
@@ -396,7 +407,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = sunshine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.ursb.sunshine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -411,7 +428,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = sunshine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.ursb.sunshine;
 				PRODUCT_NAME = "$(TARGET_NAME)";

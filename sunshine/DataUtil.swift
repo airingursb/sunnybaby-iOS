@@ -10,18 +10,18 @@ import Foundation
 
 class DataUtil {
     
-    func cacheSetString(key: String,value: String){
+    func cacheSetString(key: String, value: String){
         let userInfo = NSUserDefaults()
         userInfo.setValue(value, forKey: key)
     }
     
-    func cacheGetString(key: String) -> String{
+    func cacheGetString(key: String) -> String?{
         let userInfo = NSUserDefaults()
         let tmpSign = userInfo.stringForKey(key)
-        return tmpSign!
+        return tmpSign
     }
     
-    func cacheSetInt(key: String,value: Int){
+    func cacheSetInt(key: String, value: Int){
         let userInfo = NSUserDefaults()
         userInfo.setValue(value, forKey: key)
     }

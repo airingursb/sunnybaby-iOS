@@ -14,6 +14,7 @@ class SearchCityController: UIViewController {
     var dataUtil:DataUtil = DataUtil()
     
     @IBOutlet weak var txtCity: UITextField!
+    
     @IBAction func dismiss() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -35,7 +36,10 @@ class SearchCityController: UIViewController {
             
             if String(json["msg"]) == "success" {
                 dataUtil.cacheSetString("city", value: self.txtCity.text!)
-                dataUtil.cacheSetInt("first", value: 1)
+                print(dataUtil.cacheGetString("city"))
+                // 搜索城市标记
+                dataUtil.cacheSetString("first", value: "1")
+                
                 let alertControllerOk = UIAlertController(title: "晴宝",
                                                         message: "城市添加成功！♪(^∇^*)", preferredStyle: UIAlertControllerStyle.Alert)
                 let cancelAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
@@ -59,6 +63,16 @@ class SearchCityController: UIViewController {
         super.viewDidLoad()
         
     }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.txtCity.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun_bigger" translatesAutoresizingMaskIntoConstraints="NO" id="Djb-Qt-tbO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wid_00" translatesAutoresizingMaskIntoConstraints="NO" id="Djb-Qt-tbO">
                                 <rect key="frame" x="180" y="179" width="240" height="241"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="241" id="3yJ-vv-baK"/>
@@ -38,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="sun_bigger" width="166" height="190"/>
+        <image name="wid_00" width="166" height="190"/>
     </resources>
 </document>
